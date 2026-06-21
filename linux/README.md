@@ -102,17 +102,17 @@ CinnamenuPriority=10
 ## Instalar Entorno Apache
 ```bash
 # Ejecutar script para instalar
-bash apache.sh
+bash scripts/apache.sh
 
 # Cambiar directorio de trabajo. Puede recibir de parámetro la nueva ruta. Valor por defecto: /mnt/ddrive/html
-bash change_workdir.sh
+bash scripts/change_workdir.sh
 ```
 
 ## Instalar PHP version manager
 
 ```bash
 # Ejecutar script para instalar la librería y agregar las ufnciones install-php-version y switch-php a .bashrc
-bash install_pvm.sh
+bash scripts/install_pvm.sh
 
 #Para instalar una versión de PHP.
 install-php-version 5.6
