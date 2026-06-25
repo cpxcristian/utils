@@ -16,7 +16,8 @@ sudo ufw allow 'Apache Full'
 sudo apt install mariadb-server -y
 
 # 4. Instalar PHP y extensiones comunes
-sudo apt install php libapache2-mod-php php-mysql php-mbstring php-zip php-gd php-curl php-xml php-mcrypt -y
+sudo apt install php libapache2-mod-php php-mysql php-mbstring php-zip php-gd php-curl php-xml -y
+sudo apt install php-mcrypt
 
 # 5. Configurar phpMyAdmin de forma no interactiva (Evita las pantallas azules)
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | sudo debconf-set-selections
@@ -37,7 +38,7 @@ sudo a2enconf phpmyadmin
 
 # 9. Cambiar contraseña de root de maria-db
 echo "🔑 Cambiando contraseña de root de MariaDB..."
-sudo maria-db -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
+sudo mariadb -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
 
 # 10. Reiniciar Apache para aplicar cambios
 echo "🔄 Reiniciando Apache para aplicar cambios..."
