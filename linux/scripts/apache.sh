@@ -42,6 +42,7 @@ sudo mariadb -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'root'; FLU
 
 # 10. Reiniciar Apache para aplicar cambios
 echo "🔄 Reiniciando Apache para aplicar cambios..."
+sudo a2enmod rewrite
 sudo systemctl restart apache2
 
 echo "🎉 ¡Instalación completada con éxito!"
