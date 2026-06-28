@@ -1,0 +1,8 @@
+[Nemo Action]
+Active=true
+Name=Quitar Emblemas
+Exec=bash -c 'for f in "$@"; do gio set -t stringv "$f" metadata::emblems []; done' _ %F
+Icon-Name=edit-clear
+Selection=any
+Extensions=any;
+Quote=double

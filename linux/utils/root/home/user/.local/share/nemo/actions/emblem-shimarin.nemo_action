@@ -1,0 +1,8 @@
+[Nemo Action]
+Active=true
+Name=Emblema Shimarin
+Exec=/bin/bash -c '"$HOME/.local/share/nemo/actions/agregar_emblema.sh" "emblem-shimarin" "$@"' _ %F
+Icon-Name=emblem-shimarin
+Selection=any
+Extensions=any;
+Quote=double

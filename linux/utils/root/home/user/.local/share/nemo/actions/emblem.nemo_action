@@ -1,0 +1,8 @@
+[Nemo Action]
+Active=true
+Name=Emblema Default
+Exec=/bin/bash -c '"$HOME/.local/share/nemo/actions/agregar_emblema.sh" "emblem-default" "$@"' _ %F
+Icon-Name=emblem-default
+Selection=any
+Extensions=any;
+Quote=double

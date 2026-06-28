@@ -1,0 +1,8 @@
+[Nemo Action]
+Active=true
+Name=Abrir en Terminal
+Exec=tilix --working-directory=%F
+Icon-Name=tilix
+Selection=any
+Extensions=any;
+Shortcut-Key=<Shift>t

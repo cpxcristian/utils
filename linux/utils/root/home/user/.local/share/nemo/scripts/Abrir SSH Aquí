@@ -1,0 +1,13 @@
+#!/bin/bash
+ADDR=$(echo $NEMO_SCRIPT_CURRENT_URI | cut -d'/' -f3)
+USER_IP=$(echo $ADDR | cut -d':' -f1)
+PORT=$(echo $ADDR | cut -d':' -f2)
+
+REMOTE_PATH=$(echo $NEMO_SCRIPT_CURRENT_URI | cut -d'/' -f4-)
+REMOTE_PATH="/$REMOTE_PATH"
+
+if [ "$USER_IP" == "$PORT" ]; then
+    PORT=22
+fi
+
+tilix -e "bash -c 'ssh -p $PORT -t $USER_IP \"cd \\\"$REMOTE_PATH\\\" && exec bash\"; exec bash'"

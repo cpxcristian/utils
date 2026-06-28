@@ -1,0 +1,9 @@
+[Nemo Action]
+Active=true
+Name=Abrir con Antigravity
+Exec=/opt/Antigravity_IDE/antigravity-ide %F
+Icon-Name=antigravity
+Selection=any
+Extensions=any;
+Separator=;
+Shortcut-Key=<Shift>a
