@@ -207,3 +207,9 @@ sudo apt install git -y
 git config --global user.name "[NAME]"
 git config --global user.email "[EMAIL_ADDRESS]"
 ```
+
+### Instalar NodeJs y npm
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | bash
+nvm install --lts
+```
