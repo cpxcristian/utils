@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+"""
+Script: video_compress.py
+Descripción: Compresor de vídeos con formato .mp4 optimizado para animación.
+Autor: cpxcristian
+Fecha: 2026-05-10
+"""
+
 import subprocess
 import pathlib
 import argparse

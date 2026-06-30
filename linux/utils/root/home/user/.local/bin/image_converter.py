@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+"""
+Script: video_compress.py
+Descripción: Escala (reducir) imágenes. Recibe el parámetro "size" que es el valor máximo que ancho y alto que tendrá la imagen.
+Autor: cpxcristian
+Fecha: 2026-05-10
+"""
+
 import subprocess
 import pathlib
 import argparse
