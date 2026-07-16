@@ -8,6 +8,8 @@ case $- in
       *) return;;
 esac
 
+alias py='python3'
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -156,7 +158,6 @@ install-php-version() {
     switch-php $1
 }
 
-
 import-dump() {
     if [ -z "$1" ] || [ -z "$2" ]; then
         echo "Error: Faltan argumentos."
@@ -172,9 +173,7 @@ import-dump() {
         return 1
     fi
 
-    mariadb -u root -p -e "DROP DATABASE IF EXISTS \`$DB_NAME\`; CREATE DATABASE \`$DB_NAME\`;"
-
-    if [ $? -eq 0 ]; then
+    if mariadb -u root -p -e "DROP DATABASE IF EXISTS \`$DB_NAME\`; CREATE DATABASE \`$DB_NAME\`;"; then
         echo "Importando dump..."
         mariadb --init-command="SET SESSION FOREIGN_KEY_CHECKS=0;" -u root -p "$DB_NAME" < "$DUMP_FILE"
         echo "¡Éxito! El dump se ha importado correctamente."

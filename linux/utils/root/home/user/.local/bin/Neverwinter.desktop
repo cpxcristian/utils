@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Neverwinter
+Exec=~/.local/bin/Neverwinter.sh
+Comment=
+Terminal=false
+PrefersNonDefaultGPU=false
+Icon=/mnt/ddrive/SteamLibrary/steamapps/common/Cryptic Studios/logo.png
+Type=Application
