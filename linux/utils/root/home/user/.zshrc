@@ -72,7 +72,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -167,14 +167,14 @@ import-dump() {
     fi
 }
 
-sync-pos3-back() {
+sync-back() {
     if [ -z "$1" ] || [ -z "$2" ]; then
         echo "❌ Error. Faltan parámetros: sync-pos3-back <user@server> <directorio_remoto>"
         return 1
     fi
     ionice -c 3 rsync -rtv --size-only --inplace --bwlimit=10m -e 'ssh -p 19222' build/ $1:/var/www/html/$2/
 }
-sync-pos3-front() {
+sync-front() {
     if [ -z "$1" ] || [ -z "$2" ]; then
         echo "❌ Error. Faltan parámetros: sync-pos3-front <user@server> <directorio_remoto>"
         return 1
@@ -189,6 +189,33 @@ sync-pos3-front() {
 
     ionice -c 3 rsync -rtv --checksum --inplace --delete --bwlimit=10m "${exclude_args[@]}" -e 'ssh -p 19222' . $1:/var/www/html/$2/
 }
+sync-pos3-back() {
+    sync-back copixil@40.124.89.212 $1
+}
+sync-pos3-front() {
+    sync-front copixil@40.124.89.212 $1
+}
+sync-gelow-back() {
+    sync-back copixil@40.124.105.27 $1
+}
+sync-gelow-front() {
+    sync-front copixil@40.124.105.27 $1
+}
+sync-gelow-pos() {
+    if [ -z "$1" ]; then
+        echo "❌ Error. Faltan parámetros: sync-gelow-pos <sucursal>"
+        return 1
+    fi
+
+    local excludes=('.env' '.vscode' '.git' 'node_modules' 'storage')
+
+    local exclude_args=()
+    for item in "${excludes[@]}"; do
+        exclude_args+=(--exclude="$item")
+    done
+
+    ionice -c 3 rsync -rtv --checksum --inplace --delete --bwlimit=10m "${exclude_args[@]}" -e 'ssh -p 19222' . copixil@40.124.105.27:/var/www/html/$1/
+}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -196,3 +223,6 @@ export NVM_DIR="$HOME/.nvm"
 
 test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
 test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+
+export PATH="$PATH:/opt/android-studio-for-platform/bin"
