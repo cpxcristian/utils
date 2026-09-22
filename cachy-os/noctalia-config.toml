@@ -9,18 +9,58 @@ order = [ "default", "bottom" ]
     capsule = true
     capsule_opacity = 0.89999997988343239
     capsule_padding = 10.0
-    center = [ "launcher" ]
+    center = [ "group:g1" ]
     enabled = true
-    end = [ "tray", "notifications", "clipboard", "network", "bluetooth", "volume", "brightness", "date" ]
+    end = [ "group:g2", "clock" ]
     position = "bottom"
-    start = [ "control-center", "wallpaper" ]
+    start = [ "control-center", "wallpaper", "group:g3", "group:g4" ]
+
+        [[bar.bottom.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "launcher", "taskbar" ]
+        opacity = 0.89999997615814209
+        padding = 10.0
+
+        [[bar.bottom.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g2"
+        members = [ "tray", "notifications", "clipboard", "network", "bluetooth", "volume", "brightness" ]
+        opacity = 0.89999997615814209
+        padding = 10.0
+
+        [[bar.bottom.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g3"
+        members = [ "Neverwinter", "Background" ]
+        opacity = 0.89999997615814209
+        padding = 10.0
+
+        [[bar.bottom.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g4"
+        members = [ "Antigravity", "RustDesk" ]
+        opacity = 0.89999997615814209
+        padding = 10.0
 
     [bar.default]
     background_opacity = 0.59999998658895493
     capsule = true
     center = [ "workspaces", "active_window", "spacer_1" ]
     concave_edge_corners = true
-    end = [ "media", "spacer_1", "clock" ]
+    end = [ "screenshot", "media", "spacer_1", "date" ]
     margin_edge = 0
     margin_ends = 0
     opacity = 0.65000000000000002
@@ -34,10 +74,13 @@ order = [ "default", "bottom" ]
     thickness = 35
 
         [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
         border = ""
+        enabled = true
         fill = "on_secondary"
         id = "g1"
-        members = [ "temp", "sysmon_2", "sysmon_3" ]
+        members = [ "temp", "sysmon_2", "sysmon_3", "ram", "cpu" ]
         opacity = 0.75
         padding = 6.0
 
@@ -200,11 +243,51 @@ path = "/mnt/ddrive/Pictures/wallpapers/yuru-camp-0.png"
 [wallpaper.monitors.HDMI-A-1]
 path = "/mnt/ddrive/Pictures/wallpapers/yuru-camp-0.png"
 
+[widget.Antigravity]
+custom_image = "/opt/Antigravity_IDE/resources/app/resources/linux/code.png"
+type = "custom_button"
+
+    [widget.Antigravity.actions]
+    left = "exec /opt/Antigravity_IDE/antigravity-ide"
+
+[widget.Background]
+glyph = "image"
+type = "custom_button"
+
+    [widget.Background.actions]
+    left = "exec pkill mpvpaper; mpvpaper -n 300 -o \"no-audio --loop-playlist --shuffle\" ALL /mnt/ddrive/Pictures/wallpapers/animated/anime & disown"
+    right = "exec pkill mpvpaper"
+
+[widget.Neverwinter]
+custom_image = "/mnt/ddrive/SteamLibrary/steamapps/common/Cryptic Studios/logo.png"
+type = "custom_button"
+
+    [widget.Neverwinter.actions]
+    left = "exec /mnt/ddrive/home/apps/Neverwinter.sh"
+
+[widget.RustDesk]
+custom_image = "/var/lib/flatpak/app/com.rustdesk.RustDesk/x86_64/stable/active/export/share/icons/hicolor/256x256/apps/com.rustdesk.RustDesk.png"
+type = "custom_button"
+
+    [widget.RustDesk.actions]
+    left = "exec flatpak run com.rustdesk.RustDesk"
+
+[widget.active_window]
+display = "icon_only"
+icon_size = 24
+min_length = 0
+
 [widget.clock]
 anchor = true
 color = "primary"
 font_weight = 700
 format = "{:%H:%M:%S}"
+
+[widget.control-center]
+enabled = false
+
+[widget.cpu.actions]
+right = "exec gnome-system-monitor"
 
 [widget.date]
 color = "primary"
@@ -225,6 +308,9 @@ show_label = false
 [widget.notifications]
 color = "secondary"
 
+[widget.ram.actions]
+right = "exec gnome-system-monitor"
+
 [widget.session]
 color = "error"
 
@@ -240,6 +326,7 @@ stat = "gpu_temp"
 type = "sysmon"
 
 [widget.sysmon_3]
+enabled = false
 glyph = "cpu-2"
 stat = "ram_used"
 type = "sysmon"
@@ -255,6 +342,9 @@ capsule_fill = "on_secondary"
 [widget.volume]
 color = "secondary"
 
+[widget.wallpaper]
+enabled = false
+
 [widget.workspaces]
 active_pill_size = 2.5
 capsule = true
@@ -264,5 +354,5 @@ focused_color = "tertiary"
 font_weight = 700
 inactive_pill_size = 1.0
 label_source = "name"
-pill_scale = 1.0
+pill_scale = 0.80000000000000004
 show_labels = true
