@@ -1,0 +1,268 @@
+[accessibility]
+ui_scale = 1.2
+
+[bar]
+order = [ "default", "bottom" ]
+
+    [bar.bottom]
+    background_opacity = 0.59999998658895493
+    capsule = true
+    capsule_opacity = 0.89999997988343239
+    capsule_padding = 10.0
+    center = [ "launcher" ]
+    enabled = true
+    end = [ "tray", "notifications", "clipboard", "network", "bluetooth", "volume", "brightness", "date" ]
+    position = "bottom"
+    start = [ "control-center", "wallpaper" ]
+
+    [bar.default]
+    background_opacity = 0.59999998658895493
+    capsule = true
+    center = [ "workspaces", "active_window", "spacer_1" ]
+    concave_edge_corners = true
+    end = [ "media", "spacer_1", "clock" ]
+    margin_edge = 0
+    margin_ends = 0
+    opacity = 0.65000000000000002
+    radius = 76
+    radius_bottom_left = 12
+    radius_bottom_right = 12
+    radius_top_left = 0
+    radius_top_right = 0
+    scale = 1.1000000000000001
+    start = [ "session", "launcher", "spacer_1", "group:g1" ]
+    thickness = 35
+
+        [[bar.default.capsule_group]]
+        border = ""
+        fill = "on_secondary"
+        id = "g1"
+        members = [ "temp", "sysmon_2", "sysmon_3" ]
+        opacity = 0.75
+        padding = 6.0
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-3", "lockscreen-login-box@HDMI-A-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "DP-3"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[shell]
+clipboard_image_action_command = "swash --stdin --name \"swash-$(date +'%Y-%m-%d_%H:%M:%S').png\""
+launch_apps_as_systemd_services = true
+polkit_agent = true
+settings_show_advanced = true
+
+    [shell.animations]
+    duration_ms = 200
+    enabled = true
+
+    [shell.greeter_sync]
+    auto_sync = false
+
+    [shell.panel]
+    open_near_click_control_center = true
+    session_placement = "floating"
+    session_position = "center"
+    transparency_mode = "glass"
+
+    [shell.screenshot]
+    copy_to_clipboard = false
+    pipe_command = "swash --stdin --name \"swash-$(date +'%Y-%m-%d_%H:%M:%S').png\""
+    pipe_to_command = true
+    save_to_file = false
+
+    [[shell.session.actions]]
+    action = "lock"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "1"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "2"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+    countdown_seconds = 3.0
+    enabled = true
+    shortcut = "3"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 3.0
+    enabled = true
+    shortcut = "4"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 3.0
+    enabled = true
+    shortcut = "5"
+    variant = "destructive"
+
+    [shell.shadow]
+    alpha = 0.3899999912828207
+
+[system.monitor]
+gpu_poll_seconds = 2
+
+[theme]
+builtin = "Dracula"
+community_palette = "Oxocarbon"
+mode = "dark"
+shell_mode = "dark"
+source = "builtin"
+surface_opacity = 0.59999999999999998
+wallpaper_scheme = "m3-content"
+
+    [theme.blur]
+    enabled = true
+    opacity = 0.65000000000000002
+    radius = 16
+
+    [theme.templates]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "qt", "alacritty" ]
+
+[wallpaper.default]
+path = "/mnt/ddrive/Pictures/wallpapers/yuru-camp-0.png"
+
+[wallpaper.last]
+path = "/mnt/ddrive/Pictures/wallpapers/yuru-camp-0.png"
+
+[wallpaper.monitors.DP-3]
+path = "/mnt/ddrive/Pictures/wallpapers/yuru-camp-0.png"
+
+[wallpaper.monitors.HDMI-A-1]
+path = "/mnt/ddrive/Pictures/wallpapers/yuru-camp-0.png"
+
+[widget.clock]
+anchor = true
+color = "primary"
+font_weight = 700
+format = "{:%H:%M:%S}"
+
+[widget.date]
+color = "primary"
+font_weight = 700
+format = "{:%d/%m/%Y}"
+
+[widget.launcher]
+color = "secondary"
+
+[widget.media]
+hide_when_no_media = true
+title_scroll = "on_hover"
+
+[widget.network]
+color = "secondary"
+show_label = false
+
+[widget.notifications]
+color = "secondary"
+
+[widget.session]
+color = "error"
+
+[widget.spacer_1]
+enabled = false
+type = "spacer"
+
+[widget.sysmon_2]
+enabled = false
+glyph = "gpu-usage"
+show_value = false
+stat = "gpu_temp"
+type = "sysmon"
+
+[widget.sysmon_3]
+glyph = "cpu-2"
+stat = "ram_used"
+type = "sysmon"
+
+[widget.temp]
+enabled = false
+show_value = false
+
+[widget.tray]
+capsule = true
+capsule_fill = "on_secondary"
+
+[widget.volume]
+color = "secondary"
+
+[widget.workspaces]
+active_pill_size = 2.5
+capsule = true
+capsule_fill = "on_primary"
+color = "tertiary"
+focused_color = "tertiary"
+font_weight = 700
+inactive_pill_size = 1.0
+label_source = "name"
+pill_scale = 1.0
+show_labels = true
