@@ -7,3 +7,7 @@
 - [Instalar Cachy OS](cachy-os/README.md)
 	+ [Instalar LAMPP manual](cachy-os/scrips/apache.sh)
 	+ [Cambiar workdir de apache](cachy-os/scrips/change_workdir.sh)
+
+
+## Herramientas
+- [Fastfetch](herramientas/fastfetch.md)
