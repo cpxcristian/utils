@@ -11,3 +11,4 @@
 
 ## Herramientas
 - [Fastfetch](herramientas/fastfetch.md)
+- [mpvpaper](herramientas/mpvpaper.md)
