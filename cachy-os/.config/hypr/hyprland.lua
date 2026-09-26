@@ -32,7 +32,8 @@ hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "auto-right", s
 ---------------------
 
 -- Set programs that you use
-local terminal = "alacritty"
+local terminal = "foot"
+local navigator = "firefox"
 local fileManager = "nemo"
 local menu = "noctalia msg panel-toggle launcher"
 
@@ -64,6 +65,8 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("nm-applet --indicator")
   -- hl.exec_cmd("kitty -e sh -c 'sleep 2 && mpvpaper -o \"no-audio loop-playlist shuffle\" ALL /mnt/ddrive/Pictures/wallpapers/animated/anime'")
   hl.exec_cmd("/mnt/ddrive/home/apps/musicpresence-2.3.6-linux-x86_64.AppImage")
+  -- hl.exec_once("rclone mount gdrive: /mnt/ddriveGoogleDrive --vfs-cache-mode full")
+  
 end)
 
 
@@ -144,11 +147,21 @@ hl.config({
 
     animations = {
         enabled = true,
+        bezier = {
+            "linear, 0.0, 0.0, 1.0, 1.0"
+        },
+        animation = {
+            "borderangle, 1, 100, linear, loop"
+        }
     },
 
     layerrule = {
         "blur, ^noctalia-.*$",            -- Obliga a Hyprland a difuminar los paneles de la v5
         "ignorealpha 0.5, ^noctalia-.*$"  -- Evita esquinas con artefactos negros extraños
+    },
+    windowrulev2 = {
+        -- Fuerza el degradado animado ignorando lo que diga Noctalia
+        "bordercolor rgba(33ccffee) rgba(00ff99ee) 45deg, class:^(.*)$"
     },
 })
 
@@ -284,10 +297,13 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- CUSTOM KEYBINDS
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind("CTRL + ALT + end", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(navigator))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show run"))
 hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0 }))
 hl.bind(mainMod .. " + B", hl.dsp.window.set_prop({ prop = "opaque", value = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.workspace.move({ monitor = "+1" }))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -403,3 +419,6 @@ hl.layer_rule({
     ignore_alpha = 0.1
 })
 
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
