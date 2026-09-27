@@ -402,6 +402,12 @@ hl.window_rule({
     float = true,
 })
 
+hl.window_rule({ match = { class = "^(antigravity-ide)$" }, workspace = "1" })
+hl.window_rule({ match = { class = "^(firefox)$" }, workspace = "2" })
+hl.window_rule({ match = { class = "^(discord)$" }, workspace = "3" })
+hl.window_rule({ match = { class = "^(sublime_text)$" }, workspace = "4" })
+hl.window_rule({ match = { class = "^(nemo)$" }, workspace = "5" })
+
 -- Regla de capa unificada para inyectar Blur en Noctalia v5
 hl.layer_rule({
     name = "noctalia-global-blur",
