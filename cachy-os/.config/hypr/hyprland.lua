@@ -21,11 +21,23 @@
 ---- MONITORS ----
 ------------------
 
+local monitorMain = "DP-3"
+local monitorSec = "HDMI-A-1"
+
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
-hl.monitor({ output = "DP-3", mode = "preferred", position = "0x0", scale = 1 })
-hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "auto-right", scale = 1 })
+hl.monitor({ output = monitorMain, mode = "preferred", position = "0x0", scale = 1 })
+hl.monitor({ output = monitorSec, mode = "preferred", position = "auto-right", scale = 1 })
 
-
+hl.workspace_rule({ workspace = 1, monitor = monitorSec })
+hl.workspace_rule({ workspace = 3, monitor = monitorSec })
+hl.workspace_rule({ workspace = 5, monitor = monitorSec })
+hl.workspace_rule({ workspace = 7, monitor = monitorSec })
+hl.workspace_rule({ workspace = 9, monitor = monitorSec })
+hl.workspace_rule({ workspace = 2, monitor = monitorMain })
+hl.workspace_rule({ workspace = 4, monitor = monitorMain })
+hl.workspace_rule({ workspace = 6, monitor = monitorMain })
+hl.workspace_rule({ workspace = 8, monitor = monitorMain })
+hl.workspace_rule({ workspace = 10, monitor = monitorMain })
 
 ---------------------
 ---- MY PROGRAMS ----
