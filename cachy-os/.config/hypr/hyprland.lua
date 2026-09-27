@@ -316,6 +316,8 @@ hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0 }))
 hl.bind(mainMod .. " + B", hl.dsp.window.set_prop({ prop = "opaque", value = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.workspace.move({ monitor = "+1" }))
+hl.bind("ALT + TAB", hl.dsp.exec_cmd("noctalia msg window-switcher"))
+
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
