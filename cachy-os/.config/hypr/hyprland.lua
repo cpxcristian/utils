@@ -46,6 +46,7 @@ hl.workspace_rule({ workspace = 10, monitor = monitorMain })
 -- Set programs that you use
 local terminal = "foot"
 local navigator = "firefox"
+local texteditor = "subl"
 local fileManager = "nemo"
 local menu = "noctalia msg panel-toggle launcher"
 
@@ -312,6 +313,7 @@ hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("command -v hyprshutdown >/de
 hl.bind("CTRL + ALT + end", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(navigator))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show run"))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(texteditor))
 hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0 }))
 hl.bind(mainMod .. " + B", hl.dsp.window.set_prop({ prop = "opaque", value = "toggle" }))
