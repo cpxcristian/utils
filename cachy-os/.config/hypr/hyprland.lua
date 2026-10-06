@@ -79,7 +79,8 @@ hl.on("hyprland.start", function ()
   -- hl.exec_cmd("kitty -e sh -c 'sleep 2 && mpvpaper -o \"no-audio loop-playlist shuffle\" ALL /mnt/ddrive/Pictures/wallpapers/animated/anime'")
   hl.exec_cmd("/mnt/ddrive/home/apps/musicpresence-2.3.6-linux-x86_64.AppImage")
   -- hl.exec_once("rclone mount gdrive: /mnt/ddriveGoogleDrive --vfs-cache-mode full")
-  
+  hl.exec_cmd("firefox")
+  hl.exec_cmd("subl")
 end)
 
 
@@ -120,12 +121,12 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.config({
     general = {
         gaps_in  = 5,
-        gaps_out = 20,
+        gaps_out = 12,
 
-        border_size = 2,
+        border_size = 4,
 
         col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
+            active_border   = { colors = {"rgba(ff6c00ee)", "rgba(0066ffee)"}, angle = 45 },
             inactive_border = "rgba(595959aa)",
         },
 
@@ -138,7 +139,7 @@ hl.config({
         layout = "dwindle",
     },
     decoration = {
-        rounding       = 10,
+        rounding       = 12,
         rounding_power = 2,
         active_opacity   = 0.9,
         inactive_opacity = 0.75,
@@ -152,29 +153,14 @@ hl.config({
         
         blur = {
             enabled   = true,
-            size      = 4,
+            size      = 2,
             passes    = 1,
             vibrancy  = 0.1696,
         },
     },
-
-    animations = {
-        enabled = true,
-        bezier = {
-            "linear, 0.0, 0.0, 1.0, 1.0"
-        },
-        animation = {
-            "borderangle, 1, 100, linear, loop"
-        }
-    },
-
-    layerrule = {
-        "blur, ^noctalia-.*$",            -- Obliga a Hyprland a difuminar los paneles de la v5
-        "ignorealpha 0.5, ^noctalia-.*$"  -- Evita esquinas con artefactos negros extraños
-    },
     windowrulev2 = {
-        -- Fuerza el degradado animado ignorando lo que diga Noctalia
-        "bordercolor rgba(33ccffee) rgba(00ff99ee) 45deg, class:^(.*)$"
+        "blur, ^noctalia-.*$",
+        "ignorealpha 0.5, ^noctalia-.*$"
     },
 })
 
@@ -205,6 +191,7 @@ hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "
 hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
+hl.animation({ leaf = "borderangle",   enabled = true,  speed = 40,  bezier = "linear", style = "loop" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
@@ -304,13 +291,17 @@ hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + X", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- CUSTOM KEYBINDS
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind("CTRL + ALT + end", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
+hl.bind(mainMod .. " + SHIFT + S", function()
+    hl.dispatch(hl.dsp.exec_cmd("noctalia msg screenshot-region"))
+end)
+
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(navigator))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show run"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(texteditor))
@@ -319,6 +310,19 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0 }))
 hl.bind(mainMod .. " + B", hl.dsp.window.set_prop({ prop = "opaque", value = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.workspace.move({ monitor = "+1" }))
 hl.bind("ALT + TAB", hl.dsp.exec_cmd("noctalia msg window-switcher"))
+hl.bind(mainMod .. " + Tab", function()
+    hl.dispatch(hl.dsp.window.cycle_next())    -- Change focus to another window
+    hl.dispatch(hl.dsp.window.bring_to_top()) -- Bring it to the top
+end)
+hl.bind(mainMod .. " + D", function ()
+    if hl.get_workspace("special:minimized") then
+        hl.dispatch(hl.dsp.window.move({ workspace = hl.get_active_workspace(), window = "tag:minimized" }))
+        hl.dispatch(hl.dsp.window.clear_tags({ window = "tag:minimized" }))
+    else
+        hl.dispatch(hl.dsp.window.tag({ tag = "minimized", window = hl.get_active_window() }))
+        hl.dispatch(hl.dsp.window.move({ workspace = "special:minimized", follow = false }))
+    end
+end)
 
 
 -- Move focus with mainMod + arrow keys
@@ -336,8 +340,8 @@ for i = 1, 10 do
 end
 
 -- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+-- hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
+-- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -397,7 +401,6 @@ hl.window_rule({
         fullscreen = false,
         pin        = false,
     },
-
     no_focus = true,
 })
 
@@ -418,11 +421,38 @@ hl.window_rule({
     float = true,
 })
 
+hl.window_rule({
+    match = { class = "^(.*)$" },
+    border_color = { colors = {"rgba(3FD798ee)", "rgba(7945DDee)"}}, 
+})
+
+local function merge_objects(t1, t2)
+    local res = {}
+    for k, v in pairs(t1) do res[k] = v end
+    for k, v in pairs(t2) do res[k] = v end
+    return res
+end
+
+-- Poner aplicaciones en determinado workspace
 hl.window_rule({ match = { class = "^(antigravity-ide)$" }, workspace = "1" })
 hl.window_rule({ match = { class = "^(firefox)$" }, workspace = "2" })
 hl.window_rule({ match = { class = "^(discord)$" }, workspace = "3" })
-hl.window_rule({ match = { class = "^(sublime_text)$" }, workspace = "4" })
-hl.window_rule({ match = { class = "^(nemo)$" }, workspace = "5" })
+-- hl.window_rule({ match = { class = "^(sublime_text)$" }, workspace = "4" })
+
+-- Ventanas flotantes
+local float_window = { float = true, center = true, size = { 1880, 980 } }
+local float_dialog = { float = true, center = true, size = { 1200, 680 } }
+hl.window_rule(merge_objects({ match = { class = "^(dev.noctalia.*)$" }}, float_window))
+hl.window_rule(merge_objects({ match = { class = "^(nemo)$" }}, float_window))
+hl.window_rule(merge_objects({ match = { class = "^(org.strawberrymusicplayer.strawberry)$" }}, float_dialog))
+hl.window_rule(merge_objects({ match = { class = "^(CrossMacro.UI)$" }}, float_dialog))
+hl.window_rule(merge_objects({ match = { class = "^(Alacritty)$" }}, float_dialog))
+
+
+-- Ventanas fullscreen
+hl.window_rule({ match = { class = "^(mpv)$" }, fullscreen = true })
+hl.window_rule({ match = { class = "^(com.interversehq.qView)$" }, fullscreen = true })
+
 
 -- Regla de capa unificada para inyectar Blur en Noctalia v5
 hl.layer_rule({
